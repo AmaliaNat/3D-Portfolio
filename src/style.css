@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "hikerTM";
+  src: url("/fonts/hikerTM-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMetana-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMetana-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@theme {
+  --font-hiker: "hikerTM", sans-serif;
+  --font-neue: "Neue Montreal", sans-serif;
+}
+
+body {
+  font-family: "Neue Montreal", sans-serif;
+}
+
+:root {
+  /* primitives */
+  --red-500: #c43535;
+  --red-400: #d47373;
+
+  /* semantic */
+  --color-accent: var(--red-500);
+  /* --color-background: var(--black-900);
+  --color-foreground: var(--white-100);
+  --color-muted: var(--gray-500); */
+}
+
+#ui-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+#ui-overlay button {
+  pointer-events: auto;
+}

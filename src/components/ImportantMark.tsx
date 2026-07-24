@@ -1,0 +1,29 @@
+// src/components/ImportantMark.tsx
+export function ImportantMark({ className = '', isActive = false }: { className?: string; isActive?: boolean }) {
+    return (
+        <svg
+            viewBox="0 0 247 229"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            className={className}
+        >
+            <path
+                d="M205.877 31.4385C194.339 20.5493 168.329 1.83521 160.494 1.3312C155.678 1.02137 129.593 0.497767 90.3733 2.14462C66.4686 3.14838 52.9001 14.7605 41.7714 23.3889C32.3837 30.6675 28.2374 39.7226 22.2788 51.3005C3.28977 88.1971 3.60454 101.245 1.77303 119.33C-0.670699 143.461 3.2552 162.487 5.57575 168.96C7.87994 175.387 17.1685 186.721 29.6247 200.684C37.6267 209.655 55.046 213.719 79.9283 220.197C92.8324 223.556 106.787 225.028 125.276 226.21C143.766 227.393 166.492 227.723 181.658 226.739C203.938 225.295 212.844 219.428 216.497 215.616C225.279 206.449 229.811 190.214 236.788 170.103C239.325 162.79 240.77 152.087 242.282 137.6C245.677 105.079 245.471 83.6984 244.643 78.3886C241.489 68.0584 234.862 59.7543 219.157 49.3243C207.404 42.5173 187.971 32.6362 167.95 22.4557"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                pathLength="1"
+                style={{
+                    strokeDasharray: 1,
+                    strokeDashoffset: isActive ? 0 : 1,
+                    opacity: isActive ? 1 : 0,
+                    transition: isActive
+                        ? 'stroke-dashoffset 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0s'
+                        : 'none',
+                }}
+            />
+        </svg>
+    )
+}
