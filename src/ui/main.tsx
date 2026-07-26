@@ -6,6 +6,7 @@ import Stats from 'three/addons/libs/stats.module.js'
 import { createRoot } from 'react-dom/client'
 import { App } from './App'
 import { Popup } from './Popup'
+import { LeftPanel } from './LeftPanel'
 import { GUI } from 'dat.gui'
 
 //#region scene
@@ -17,6 +18,8 @@ scene.add(new THREE.AxesHelper(5))
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.set(0, 0, 0.5)
 camera.rotation.set(0, 0, 0)
+camera.fov = 92;
+camera.updateProjectionMatrix();
 //#endregion camera
 
 //#region webgl renderer
@@ -42,7 +45,10 @@ window.addEventListener('resize', () => {
 })
 
 const controls = new OrbitControls(camera, renderer.domElement)
+controls.target.set(0, 0, 0)
 controls.enableDamping = true
+controls.minDistance = 0.3
+controls.maxDistance = 0.6
 //#endregion
 
 //#region room
@@ -80,6 +86,7 @@ scene.add(ambientLight)
 const panelEl = document.createElement('div')
 panelEl.style.pointerEvents = 'auto'
 panelEl.style.width = '1600px'
+panelEl.style.backfaceVisibility = 'hidden'
 
 const panelObject = new CSS3DObject(panelEl)
 panelObject.position.set(0, 0.2, -0.99)
@@ -93,11 +100,10 @@ panelRoot.render(<App />)
 //#region popup panel — same wall as "About me", positioned just below it
 const popupEl = document.createElement('div')
 popupEl.style.pointerEvents = 'auto'
-popupEl.style.width = '1600px' // match panelEl's width so it lines up
+popupEl.style.width = '1600px'
+popupEl.style.backfaceVisibility = 'hidden'
 
 const popupObject = new CSS3DObject(popupEl)
-// same x/z as panelObject (same wall, no rotation needed) — just lower on y.
-// tweak the y offset below until it sits right underneath the panel.
 popupObject.position.set(0, -0.35, -0.99)
 popupObject.scale.set(0.001, 0.001, 0.001)
 scene.add(popupObject)
@@ -106,8 +112,26 @@ const popupRoot = createRoot(popupEl)
 popupRoot.render(<Popup />)
 //#endregion
 
+//#region dummy panel — left wall, build on this later
+const leftPanelEl = document.createElement('div')
+leftPanelEl.style.pointerEvents = 'auto'
+leftPanelEl.style.width = '1600px'
+leftPanelEl.style.backfaceVisibility = 'hidden'
+
+const leftPanelObject = new CSS3DObject(leftPanelEl)
+// NOTE: all three position args are required — a missing 3rd arg (z) leaves
+// the object at an invalid/NaN position, which caused the resizing glitch.
+leftPanelObject.position.set(-0.99, 0.2, 0)
+leftPanelObject.rotation.y = Math.PI / 2 // face into the room from the left wall
+leftPanelObject.scale.set(0.001, 0.001, 0.001)
+scene.add(leftPanelObject)
+
+const leftPanelRoot = createRoot(leftPanelEl)
+leftPanelRoot.render(<LeftPanel />)
+//#endregion
+
 //#region gui
-const gui = new GUI();
+const gui = new GUI()
 const cameraFolder = gui.addFolder('Camera')
 cameraFolder.add(camera.position, 'x', -10, 10)
 cameraFolder.add(camera.position, 'y', -10, 10)
