@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ImportantMark } from '../components/ImportantMark'
+import { popupState } from '../popupState'
 
 const columns = [
     { number: '01', title: 'Past Works', content: ['aa', 'aa', 'aa', 'aa', 'aa', 'aa'] },
@@ -8,10 +9,14 @@ const columns = [
 ]
 
 export function App() {
-    const [activeColumn, setActiveColumn] = useState<number | null>(null)
+    const [snapshot, setSnapshot] = useState(popupState.getSnapshot())
+
+    useEffect(() => popupState.subscribe(setSnapshot), [])
+
+    const { activeColumn } = snapshot
 
     const handleColumnClick = (i: number) => {
-        setActiveColumn((prev) => (prev === i ? null : i))
+        popupState.setActiveColumn(activeColumn === i ? null : i)
     }
 
     return (
@@ -38,7 +43,7 @@ export function App() {
                                     {col.content.map((line, j) => <li key={j}>{line}</li>)}
                                 </ul>
 
-                                <button
+                                {/* <button
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         handleColumnClick(i)
@@ -46,7 +51,7 @@ export function App() {
                                     className="relative z-10 border-2 border-white text-white px-6 py-2 hover:bg-white hover:text-[var(--red-500)] transition-colors duration-200"
                                 >
                                     Learn more
-                                </button>
+                                </button> */}
 
                                 <ImportantMark
                                     isActive={isActive}

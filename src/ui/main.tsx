@@ -5,6 +5,7 @@ import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer
 import Stats from 'three/addons/libs/stats.module.js'
 import { createRoot } from 'react-dom/client'
 import { App } from './App'
+import { Popup } from './Popup'
 import { GUI } from 'dat.gui'
 
 //#region scene
@@ -27,7 +28,6 @@ document.getElementById('webgl-container')!.appendChild(renderer.domElement)
 //#region css3d renderer
 const cssRenderer = new CSS3DRenderer()
 cssRenderer.setSize(window.innerWidth, window.innerHeight)
-// CSS3D layer must not block clicks except where a real UI element wants them
 cssRenderer.domElement.style.position = 'absolute'
 cssRenderer.domElement.style.top = '0'
 cssRenderer.domElement.style.pointerEvents = 'none'
@@ -76,20 +76,35 @@ const ambientLight = new THREE.AmbientLight(0xffffff, Math.PI)
 scene.add(ambientLight)
 //#endregion
 
-
+//#region "About me" panel — back wall
 const panelEl = document.createElement('div')
 panelEl.style.pointerEvents = 'auto'
 panelEl.style.width = '1600px'
 
 const panelObject = new CSS3DObject(panelEl)
-
-// position on the back wall, just off the surface
 panelObject.position.set(0, 0.2, -0.99)
-
-
 panelObject.scale.set(0.001, 0.001, 0.001)
-
 scene.add(panelObject)
+
+const panelRoot = createRoot(panelEl)
+panelRoot.render(<App />)
+//#endregion
+
+//#region popup panel — same wall as "About me", positioned just below it
+const popupEl = document.createElement('div')
+popupEl.style.pointerEvents = 'auto'
+popupEl.style.width = '1600px' // match panelEl's width so it lines up
+
+const popupObject = new CSS3DObject(popupEl)
+// same x/z as panelObject (same wall, no rotation needed) — just lower on y.
+// tweak the y offset below until it sits right underneath the panel.
+popupObject.position.set(0, -0.35, -0.99)
+popupObject.scale.set(0.001, 0.001, 0.001)
+scene.add(popupObject)
+
+const popupRoot = createRoot(popupEl)
+popupRoot.render(<Popup />)
+//#endregion
 
 //#region gui
 const gui = new GUI();
@@ -110,10 +125,6 @@ cameraFolder.add(camera, 'far', 0.01, 10).onChange(() => {
     camera.updateProjectionMatrix()
 })
 cameraFolder.open()
-//#endregion
-
-const root = createRoot(panelEl)
-root.render(<App />)
 //#endregion
 
 function animate() {
