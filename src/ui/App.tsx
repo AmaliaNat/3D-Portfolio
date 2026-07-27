@@ -15,15 +15,14 @@ export function App() {
 
     const { activeColumn } = snapshot
 
+    const currentActiveColumn = activeColumn ?? 0
+
     const handleColumnClick = (i: number) => {
-        popupState.setActiveColumn(activeColumn === i ? null : i)
+        popupState.setActiveColumn(currentActiveColumn === i ? null : i)
     }
 
-    // Helper function to pick the correct icon
     const renderIcon = (columnIndex: number, itemIndex: number) => {
-        // Third column (index 2)
         if (columnIndex === 2) {
-            // Email icon for the first contact item (index 0)
             if (itemIndex === 0) {
                 return (
                     <svg className="w-10 h-10 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +30,6 @@ export function App() {
                     </svg>
                 )
             }
-            // Phone icon for the second contact item (index 1)
             if (itemIndex === 1) {
                 return (
                     <svg className="w-10 h-10 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +39,6 @@ export function App() {
             }
         }
 
-        // Default Asterisk Icon for all other items
         return (
             <svg className="w-10 h-10 shrink-0" fill="#ffffff" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
                 <path d="M207.67432,174a3.99891,3.99891,0,0,1-5.46387,1.46436L132,134.92847V216a4,4,0,0,1-8,0V134.92847L53.78955,175.46436a4.00022,4.00022,0,0,1-4-6.92872L119.99951,128l-70.21-40.53564a4.00022,4.00022,0,0,1,4-6.92872L124,121.07153V40a4,4,0,0,1,8,0v81.07153l70.21045-40.53589a4.00022,4.00022,0,0,1,4,6.92872L136.00049,128l70.21,40.53564A4.00006,4.00006,0,0,1,207.67432,174Z"></path>
@@ -74,7 +71,7 @@ export function App() {
 
             <div className="grid grid-cols-[auto_auto_auto] border-4 border-[#9c9c9c] rounded-[10px] text-[clamp(2rem,5vw,3rem)] ">
                 {columns.map((col, i) => {
-                    const isActive = activeColumn === i
+                    const isActive = currentActiveColumn === i
                     return (
                         <div
                             key={i}
@@ -93,7 +90,6 @@ export function App() {
                                 <ul className="relative z-10 text-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-col items-start gap-3">
                                     {col.content.map((line, j) => (
                                         <li key={j} className="flex items-center gap-8">
-                                            {/* Render specific icon based on column index and row index */}
                                             {renderIcon(i, j)}
                                             <span>{line}</span>
                                         </li>

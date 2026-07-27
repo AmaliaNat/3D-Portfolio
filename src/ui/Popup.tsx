@@ -4,7 +4,7 @@ import { popupState } from '../popupState'
 const columnDetails = [
     { title: 'Past Works', body: 'Content for column 1 goes here — edit this later.' },
     { title: 'Skills', body: 'Content for column 2 goes here — edit this later.' },
-    { title: 'Past Works', body: 'Content for column 3 goes here — edit this later.' },
+    { title: 'Contact me', body: 'Content for column 3 goes here — edit this later.' },
 ]
 
 export function Popup() {
@@ -14,15 +14,17 @@ export function Popup() {
 
     const { activeColumn } = snapshot
 
-    if (activeColumn === null) return null
+    const currentActiveColumn = activeColumn ?? 0
 
-    const detail = columnDetails[activeColumn]
+    const detail = columnDetails[currentActiveColumn]
+
+    if (!detail) return null
 
     return (
         <div className="bg-white text-black p-10 w-full relative shadow-[36px_25px_100px_white]">
             <button
                 onClick={() => popupState.setActiveColumn(null)}
-                className="absolute top-3 right-4 text-2xl leading-none"
+                className="absolute top-3 right-4 text-2xl leading-none cursor-pointer"
             >
                 ×
             </button>
