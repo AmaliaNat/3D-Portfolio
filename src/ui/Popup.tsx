@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { popupState } from '../popupState'
 
 const columnDetails = [
-    { title: 'Skills', body: 'LOOK AT YOUR LEFT' },
-    { title: 'Skills', body: 'LOOK AT YOUR RIGHT' },
-    { title: 'Contact me', body: 'BEHIND YOU' },
+    { title: 'Skills', body: 'LOOK AT YOUR LEFT', image: 'images/left-arrow.png' },
+    { title: 'Skills', body: 'LOOK AT YOUR RIGHT', image: 'images/right-arrow.png' },
+    { title: 'Contact me', body: 'BEHIND YOU', image: 'images/behind-arrow.png' },
 ]
 
 export function Popup() {
@@ -51,7 +51,7 @@ export function Popup() {
                 <div
                     className="w-full h-full bg-cover bg-center"
                     style={{
-                        backgroundImage: "url('https://i.pinimg.com/control1/1200x/3b/45/83/3b4583437b8d5f267a0ec8d0cff4c032.jpg')",
+                        backgroundImage: `url(${detail.image})`,
                         clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
                     }}
                 />
@@ -68,7 +68,7 @@ export function Popup() {
 
             {/* RIGHT SIDE: BODY TEXT */}
             <div className="flex-1 text-left">
-                <p className="text-[clamp(5rem,25vw,20rem)]   font-hiker uppercase leading-[0.6] tracking-tight">
+                <p className="text-[clamp(2rem,25vw,10rem)] text-[#6b6b6b]   font-timegoing uppercase leading-[0.8] tracking-tight">
                     {detail.body}
                 </p>
             </div>

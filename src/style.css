@@ -32,11 +32,18 @@
   font-weight: 400;
   font-style: normal;
 }
-
+@font-face {
+  font-family: "Timegoing";
+  src: url("./fonts/Timegoing-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 @theme {
   --font-hiker: "hikerTM", sans-serif;
   --font-neue: "Neue Montreal", sans-serif;
   --font-salsa: "Salsa BT", sans-serif;
+  --font-timegoing: "Timegoing", sans-serif;
 }
 
 body {
