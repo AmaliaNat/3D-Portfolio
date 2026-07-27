@@ -5,7 +5,8 @@ type State = {
 type Listener = (state: State) => void
 
 let listeners: Listener[] = []
-let state: State = { activeColumn: null }
+// starts at 0 so the first panel/popup is visible immediately without a click
+let state: State = { activeColumn: 0 }
 
 export const popupState = {
     setActiveColumn(i: number | null) {
