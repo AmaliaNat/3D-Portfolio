@@ -19,7 +19,7 @@ export function Popup() {
     const detail = columnDetails[activeColumn]
 
     return (
-        <div className="bg-white text-black p-10 w-full relative">
+        <div className="bg-white text-black p-10 w-full relative shadow-[36px_25px_100px_white]">
             <button
                 onClick={() => popupState.setActiveColumn(null)}
                 className="absolute top-3 right-4 text-2xl leading-none"

@@ -85,7 +85,7 @@ scene.add(ambientLight)
 //#region "About me" panel — back wall
 const panelEl = document.createElement('div')
 panelEl.style.pointerEvents = 'auto'
-panelEl.style.width = '1600px'
+panelEl.style.width = '1800px'
 panelEl.style.backfaceVisibility = 'hidden'
 
 const panelObject = new CSS3DObject(panelEl)
@@ -104,7 +104,7 @@ popupEl.style.width = '1600px'
 popupEl.style.backfaceVisibility = 'hidden'
 
 const popupObject = new CSS3DObject(popupEl)
-popupObject.position.set(0, -0.35, -0.99)
+popupObject.position.set(0, -0.50, -0.99)
 popupObject.scale.set(0.001, 0.001, 0.001)
 scene.add(popupObject)
 
