@@ -19,9 +19,24 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Salsa BT";
+  src: url("/fonts/Salsa-BT-Regular-4-3-2-1.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Salsa BT";
+  src: url("/fonts/Salsa-BT-Redonda-3-2-1.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 @theme {
   --font-hiker: "hikerTM", sans-serif;
   --font-neue: "Neue Montreal", sans-serif;
+  --font-salsa: "Salsa BT", sans-serif;
 }
 
 body {
@@ -51,4 +66,24 @@ body {
 }
 #ui-overlay button {
   pointer-events: auto;
+}
+@keyframes lightEmit {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+    box-shadow: 0 0 0px 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow:
+      0 0 100px 25px rgba(255, 255, 255, 0.7),
+      0 0 150px 60px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.96);
+    box-shadow:
+      0 0 100px 25px rgba(255, 255, 255, 0.7),
+      0 0 120px 40px rgba(255, 255, 255, 0.3);
+  }
 }

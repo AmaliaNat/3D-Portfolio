@@ -3,8 +3,8 @@ import { ImportantMark } from '../components/ImportantMark'
 import { popupState } from '../popupState'
 
 const columns = [
-    { number: '01', title: 'Past Works', content: ['Kaotim', 'Samsung', 'CelcomDigi', 'Aeson', 'S', 'aa'] },
-    { number: '02', title: 'Skills', content: ['WP', 'payload', 'nextjs', 'react', 'sql'] },
+    { number: '01', title: 'SKILLS', content: ['Kaotim', 'Samsung', 'CelcomDigi', 'Aeson', 'S', 'aa'] },
+    { number: '02', title: 'PAST WORKS', content: ['WP', 'payload', 'nextjs', 'react', 'sql'] },
     { number: '03', title: 'Contact me', content: ['amaliantsha@gmail.com', '0196117609'] },
 ]
 
@@ -47,11 +47,11 @@ export function App() {
     }
 
     return (
-        <div className=" py-10 px-15 pb-25 w-full relative rounded-5 overflow-hidden">
+        <div className="py-40 cursor-pointer px-20 flex flex-col items-start gap-10  w-full relative rounded-5 overflow-hidden">
             <div
                 className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay bg-cover bg-center "
                 style={{
-                    backgroundImage: "url('/images/grey.png')"
+                    backgroundImage: "url('images/testss2.png')"
                 }}
             />
             <div
@@ -60,51 +60,67 @@ export function App() {
             />
 
             <img
-                className='absolute right-[-70px] top-[-60px] w-[500px] z-1 backdrop-grayscale'
+                className='absolute right-[-70px] top-[-60px]  w-[500px] z-0 backdrop-grayscale'
                 src="/images/fluffy-star-white.png"
                 alt="Profile"
             />
+            {columns.map((col, i) => {
+                const isActive = currentActiveColumn === i
 
-            <div className="heading text-[#fffcee] font-hiker leading-none text-[clamp(5rem,25vw,30rem)]">
-                About me
-            </div>
+                return (
+                    <div
+                        key={i}
+                        onClick={() => handleColumnClick(i)}
+                        className={`heading text-[#D9D9D9] tracking-tight font-salsa leading-[1] z-10 text-[clamp(5rem,25vw,20rem)]  ${isActive ? 'text-white' : ''}`}>
+                        {col.title}
+                    </div>
 
-            <div className="grid grid-cols-[auto_auto_auto] border-4 border-[#9c9c9c] rounded-[10px] text-[clamp(2rem,5vw,3rem)] ">
-                {columns.map((col, i) => {
-                    const isActive = currentActiveColumn === i
-                    return (
-                        <div
-                            key={i}
-                            onClick={() => handleColumnClick(i)}
-                            className={`border-e-4 border-[#9c9c9c] cursor-pointer`}
-                        >
-                            {/* HEADING */}
-                            <div className={`grid grid-cols-[auto_auto_1fr] border-b-2 border-[#9c9c9c] ${isActive ? 'text-white' : 'text-white'}`}>
-                                <div className="text-center border-[#9c9c9c] p-5 text-[#b6b6b6] tracking-tight font-semibold">{col.number}</div>
-                                <div className="py-5"> <div className="bg-[#b6b6b6] w-[4px] h-[100%] "></div></div>
-                                <div className="text-start p-5 font-bold ">{col.title}</div>
+                )
+            })}
+
+
+            {/* <div className=' text-[clamp(1.25rem,2.5vw,1.75rem)]'>Lorem Ipsuym</div> */}
+
+            {/*
+                <div className="grid grid-cols-[auto_auto_auto] border-4 border-[#4b0808] rounded-[10px] text-[clamp(2rem,5vw,3rem)] ">
+                    {columns.map((col, i) => {
+                        const isActive = currentActiveColumn === i
+                        return (
+                            <div
+                                key={i}
+                                onClick={() => handleColumnClick(i)}
+                                className={`border-e-4 border-[#4b0808] cursor-pointer`}
+                            >
+                                <div className={`grid grid-cols-[auto_auto_1fr] border-b-2 border-[#4b0808] ${isActive ? 'text-white' : 'text-white'}`}>
+                                    <div className="text-center border-[#4b0808] p-5 text-[#4b0808] tracking-tight font-semibold">{col.number}</div>
+                                    <div className="py-5"> <div className="bg-[#4b0808] w-[4px] h-[100%] "></div></div>
+                                    <div className="text-start p-5 font-bold ">{col.title}</div>
+                                </div>
+
+                                <div className="text-center text-white pe-5 py-10 relative overflow-hidden flex flex-col items-start gap-6 ps-12 tracking-[0.08em]">
+                                    <ul className="relative z-10 text-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-col items-start gap-3">
+                                        {col.content.map((line, j) => (
+                                            <li key={j} className="flex items-center gap-8">
+                                                {renderIcon(i, j)}
+                                                <span>{line}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <ImportantMark
+                                        isActive={isActive}
+                                        className="absolute inset-0 w-full h-full text-[#3B10E7] pointer-events-none"
+                                    />
+                                </div>
                             </div>
-
-                            {/* CONTENT */}
-                            <div className="text-center text-white pe-5 py-10 relative overflow-hidden flex flex-col items-start gap-6 ps-12 tracking-[0.08em]">
-                                <ul className="relative z-10 text-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-col items-start gap-3">
-                                    {col.content.map((line, j) => (
-                                        <li key={j} className="flex items-center gap-8">
-                                            {renderIcon(i, j)}
-                                            <span>{line}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <ImportantMark
-                                    isActive={isActive}
-                                    className="absolute inset-0 w-full h-full text-[#3B10E7] pointer-events-none"
-                                />
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+                        )
+                    })}
+                </div>
+                */
+            }
         </div>
+
+
+
     )
 }
